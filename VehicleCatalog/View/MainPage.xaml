@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VehicleCatalog.MainPage">
+
+    <ListView x:Name="vehicleMakeList" ItemsSource="{Binding VehicleMakes}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowHeight="70" ItemTapped="ListView_ItemTapped" SelectionMode="None">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Frame BackgroundColor="White" HasShadow="True" Margin="4" Padding="4">
+                        
+                        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                            <Label x:Name="id" Text="{Binding id}" TextColor="Black" FontSize="12" VerticalOptions="Center" HorizontalOptions="Start" Margin="5"/>
+                            <Label x:Name="name" Text="{Binding name}" HorizontalOptions="Center" TextColor="Black" FontSize="12" VerticalOptions="Center" Margin="5"/>
+                            <Label x:Name="abrv" Text="{Binding abrv}" HorizontalOptions="End" TextColor="Black" FontSize="12" VerticalOptions="Center" Margin="5"/>
+                        </Grid>
+                    </Frame>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+
+</ContentPage>
