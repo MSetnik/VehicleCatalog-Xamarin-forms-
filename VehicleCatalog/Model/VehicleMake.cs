@@ -10,20 +10,20 @@ namespace VehicleCatalog.Model
         public int id { get; set; }
         public string name { get; set; }
         public string abrv { get; set; }
-        public List<VehicleModel> lVehicleModel { get; set; }
+        //public List<VehicleModel> lVehicleModel { get; set; }
 
 
-        public VehicleMake (int id, string name, string abrv, List<VehicleModel>vehicleModels)
+        public VehicleMake (int id, string name, string abrv)
         {
             this.id = id;
             this.name = name;
             this.abrv = abrv;
-            this.lVehicleModel = vehicleModels;
+            //this.lVehicleModel = vehicleModels;
         }
 
        
 
-        private List<VehicleMake> InitVehicleMakeData()
+      /*  private List<VehicleMake> InitVehicleMakeData()
         {
             List<VehicleMake> lVehicleMake = new List<VehicleMake>();
 
@@ -51,7 +51,7 @@ namespace VehicleCatalog.Model
         {
             List<VehicleModel>lMakerModels = (List<VehicleModel>)lVehicleModel.Where(vm => vm.makeId == makerId);
             return lMakerModels;
-        }
+        }*/
     }
 
 }
