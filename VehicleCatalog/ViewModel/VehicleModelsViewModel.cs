@@ -6,7 +6,7 @@ using VehicleCatalog.Model;
 
 namespace VehicleCatalog.ViewModel
 {
-    class VehicleModels_ViewModel
+    class VehicleModelsViewModel
     {
         public List<VehicleModel> lVehicleModels = new List<VehicleModel>();
         public void GetMakerModels(List<VehicleModel> lVehicleModels)

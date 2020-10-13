@@ -1,21 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="VehicleCatalog.MainPage">
-    <ListView x:Name="vehicleMakeList" ItemsSource="{Binding VehicleMakes}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowHeight="70" ItemTapped="ListView_ItemTapped" SelectionMode="None">
-        <ListView.ItemTemplate>
+             x:Class="VehicleCatalog.MainPage"
+             Title="Vehicle catalog">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="MenuItem1" Order="Primary" Text="Add new" Priority="0" Clicked="AddNewVehicleMaker"/>
+    </ContentPage.ToolbarItems>
+    <StackLayout>
+        <StackLayout BackgroundColor="#525050" Padding="5,0,5,0" Margin="0,4,0,0" HeightRequest="70">
+            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Label Text="ID" TextColor="White" FontSize="12" VerticalOptions="Center" HorizontalOptions="Start" Margin="5"/>
+                <Label Text="Name" HorizontalOptions="Center" TextColor="White" FontSize="12" VerticalOptions="Center" Margin="5"/>
+                <Label Text="Abrv" HorizontalOptions="End" TextColor="White" FontSize="12" VerticalOptions="Center" Margin="5"/>
+            </Grid>
+        </StackLayout>
+        <ListView x:Name="vehicleMakeList" ItemsSource="{Binding VehicleMakes}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowHeight="70" ItemTapped="ListView_ItemTapped" SelectionMode="None">
+            <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
                     <Frame BackgroundColor="White" HasShadow="True" Margin="4" Padding="4">
                         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                            <Label x:Name="id" Text="{Binding id}" TextColor="Black" FontSize="12" VerticalOptions="Center" HorizontalOptions="Start" Margin="5"/>
-                            <Label x:Name="name" Text="{Binding name}" HorizontalOptions="Center" TextColor="Black" FontSize="12" VerticalOptions="Center" Margin="5"/>
-                            <Label x:Name="abrv" Text="{Binding abrv}" HorizontalOptions="End" TextColor="Black" FontSize="12" VerticalOptions="Center" Margin="5"/>
+                            <Label x:Name="id" Text="{Binding id}" TextColor="Black" FontSize="12" VerticalOptions="Center" HorizontalOptions="Start"/>
+                            <Label x:Name="name" Text="{Binding name}" TextColor="Black" FontSize="12" VerticalOptions="Center" HorizontalOptions="Center"/>
+                            <Label x:Name="abrv" Text="{Binding abrv}" TextColor="Black" FontSize="12" VerticalOptions="Center" HorizontalOptions="End" />
                         </Grid>
                     </Frame>
                 </ViewCell>
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>
+    </StackLayout>
+    
 
 </ContentPage>

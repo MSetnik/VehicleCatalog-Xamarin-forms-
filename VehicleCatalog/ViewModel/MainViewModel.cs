@@ -1,31 +1,48 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using VehicleCatalog.Model;
+using VehicleCatalog.Service;
 
 namespace VehicleCatalog.ViewModel
 {
     public class MainViewModel : INotifyPropertyChanged
     {
+        public ObservableCollection<VehicleMake> lVehicleMake = new ObservableCollection<VehicleMake>();
+        public ObservableCollection<VehicleMake> oVehicleMakes;
+        public VehicleMakeService vehicleMakeService;
+
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public List<VehicleMake> VehicleMakes { get => InitVehicleModelData(); }
-
-        public List<VehicleMake> InitVehicleModelData()
+        public MainViewModel()
         {
-            List<VehicleMake> lVehicleMake = new List<VehicleMake>();
-           // GetVehicleModels();
-            
-            VehicleMake vm = new VehicleMake(1, "Audi", "Audi"/*, GetMakerModels(1)*/);
-            VehicleMake vm1 = new VehicleMake(2, "BMW", "BMW"/*, GetMakerModels(2)*/);
-            VehicleMake vm2 = new VehicleMake(3, "Volkswagen", "VW"/*, GetMakerModels(3)*/);
-            VehicleMake vm3 = new VehicleMake(4, "Opel", "Opel"/*, GetMakerModels(4)*/);
-            VehicleMake vm4 = new VehicleMake(5, "Ford", "Ford"/*, GetMakerModels(5)*/);
-            VehicleMake vm5 = new VehicleMake(6, "Mercedes-benz", "Mercedes-benz"/*, GetMakerModels(6)*/);
-            VehicleMake vm6 = new VehicleMake(7, "Škoda", "Škoda"/*, GetMakerModels(7)*/);
+            InitVehicleModelData();
+            vehicleMakeService = new VehicleMakeService(lVehicleMake);
+            oVehicleMakes = new ObservableCollection<VehicleMake>(vehicleMakeService.ReadVehicleMake());
+        }
+
+        public ObservableCollection<VehicleMake> VehicleMakes { get => oVehicleMakes; set { oVehicleMakes = value;  OnPropertyChanged(nameof(VehicleMakes)); } }
+
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public void InitVehicleModelData()
+        {
+
+            VehicleMake vm = new VehicleMake(1, "BMW", "BMW");
+            VehicleMake vm1 = new VehicleMake(2, "Audi", "Audi");
+            VehicleMake vm2 = new VehicleMake(3, "Volkswagen", "VW");
+            VehicleMake vm3 = new VehicleMake(4, "Opel", "Opel");
+            VehicleMake vm4 = new VehicleMake(5, "Ford", "Ford");
+            VehicleMake vm5 = new VehicleMake(6, "Mercedes-benz", "Mercedes-benz");
+            VehicleMake vm6 = new VehicleMake(7, "Škoda", "Škoda");
 
 
             lVehicleMake.Add(vm);
@@ -35,15 +52,6 @@ namespace VehicleCatalog.ViewModel
             lVehicleMake.Add(vm4);
             lVehicleMake.Add(vm5);
             lVehicleMake.Add(vm6);
-
-            return lVehicleMake;
-        }
-
-        public List<VehicleModel> GetSelectedMakerId(int makerId)
-        {
-            List<VehicleModel> lVModels = new List<VehicleModel>();
-            lVModels = GetMakerModels(makerId);
-            return lVModels;
         }
 
         public List<VehicleModel> GetVehicleModels()
@@ -71,11 +79,9 @@ namespace VehicleCatalog.ViewModel
             lVehicleModel.Add(new VehicleModel(19, 7, "Fabia", "Škoda"));
 
             return lVehicleModel;
-
-
         }
 
-        public List<VehicleModel> GetMakerModels(int makerId)
+        public List<VehicleModel> GetSelectedMakerId(int makerId)
         {
 
             List<VehicleModel> lVehicleModel = GetVehicleModels();
