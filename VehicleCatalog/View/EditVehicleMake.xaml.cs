@@ -5,35 +5,33 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using VehicleCatalog.Model;
-using VehicleCatalog.Service;
 using VehicleCatalog.ViewModel;
+using VehicleCatalog.Model;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace VehicleCatalog.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AddVehicleMake : ContentPage
+    public partial class EditVehicleMake : ContentPage
     {
-        ObservableCollection<VehicleMake> lVehicleMake = new ObservableCollection<VehicleMake>();
-        AddVehicleMakerVievModel addVehicleMakeVM;
-
-        int id;
-        public AddVehicleMake(ObservableCollection<VehicleMake> vehicleMakes, int id)
+        private VehicleMake vehicleMake;
+        private EditVehicleMakeViewModel editVM;
+        public EditVehicleMake(VehicleMake vehicleMake, ObservableCollection<VehicleMake> lVehicleMake)
         {
             InitializeComponent();
-            lVehicleMake = vehicleMakes;
-            addVehicleMakeVM = new AddVehicleMakerVievModel(lVehicleMake);
-            this.id = id;
+            editVM = new EditVehicleMakeViewModel(vehicleMake, lVehicleMake);
+            BindingContext = editVM;
+            this.vehicleMake = vehicleMake;
         }
 
         private void Save_Clicked(object sender, EventArgs e)
         {
+            var Id = vehicleMake.id;
             var Name = vehicleName.Text;
             var Abrv = vehicleAbrv.Text;
 
-            addVehicleMakeVM.CreateVehicleMake(id, Name, Abrv);
+            editVM.EditVehicleMake(Id, Name, Abrv, vehicleMake);
             App.Current.MainPage.Navigation.PopAsync();
             CrossToastPopUp.Current.ShowToastMessage("Saved");
         }

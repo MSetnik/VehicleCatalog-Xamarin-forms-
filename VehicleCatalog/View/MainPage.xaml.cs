@@ -14,41 +14,54 @@ using Xamarin.Forms;
 namespace VehicleCatalog
 {
     public partial class MainPage : ContentPage
-    { 
+    {
         MainViewModel mainViewModel = new MainViewModel();
         ObservableCollection<VehicleMake> lVehicleMakes = new ObservableCollection<VehicleMake>();
-        ListView listViewVehicleMake;
+        int id;
         public MainPage()
         {
-           
+
             InitializeComponent();
             BindingContext = mainViewModel;
             lVehicleMakes = mainViewModel.VehicleMakes;
-            /*listViewVehicleMake = vehicleMakeList;
-            listViewVehicleMake.ItemsSource = lVehicleMakes;*/
+            id = lVehicleMakes.Count;
 
         }
-
-        private async void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             var selectedItem = e.Item as VehicleMake;
-            
-            //CrossToastPopUp.Current.ShowToastMessage(selectedItem.id.ToString());
-            await Navigation.PushAsync(new VehicleModels(mainViewModel.GetSelectedMakerId(selectedItem.id)));
+
+            Navigation.PushAsync(new VehicleModels(mainViewModel.GetSelectedMakerId(selectedItem.id)));
         }
 
-        private async void AddNewVehicleMaker(object sender, EventArgs e)
+        private void AddNewVehicleMaker(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new AddVehicleMake(lVehicleMakes));
-            CrossToastPopUp.Current.ShowToastMessage(mainViewModel.vehicleMakeService.ReadVehicleMake().Count.ToString());
+            Navigation.PushAsync(new AddVehicleMake(lVehicleMakes, ++id));
 
         }
 
-        protected override void OnAppearing()
+        private void DeleteItem(object sender, EventArgs e)
         {
-            base.OnAppearing();
-            //listViewVehicleMake.ItemsSource = lVehicleMakes;
-            CrossToastPopUp.Current.ShowToastMessage(lVehicleMakes.Count.ToString());
+            var item = sender as SwipeItem;
+            var deleteItem = item.BindingContext as VehicleMake;
+
+            foreach (VehicleMake vm in lVehicleMakes.ToList())
+            {
+                if (deleteItem.id == vm.id)
+                {
+                    lVehicleMakes.Remove(vm);
+                }
+
+            }
+
+        }
+
+        private void EditItem(object sender, EventArgs e)
+        {
+            var item = sender as SwipeItem;
+            var editItem = item.BindingContext as VehicleMake;
+
+            Navigation.PushAsync(new EditVehicleMake(editItem, lVehicleMakes));
         }
     }
 }

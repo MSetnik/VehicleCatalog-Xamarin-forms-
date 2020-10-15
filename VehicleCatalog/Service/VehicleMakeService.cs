@@ -1,31 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using VehicleCatalog.Model;
-using VehicleCatalog.ViewModel;
 
 namespace VehicleCatalog.Service
 {
     public class VehicleMakeService
     {
-        ObservableCollection<VehicleMake> lVehicleMake;
-
-        public VehicleMakeService(ObservableCollection<VehicleMake> lVehiceMake)
+        private ObservableCollection<VehicleMake> lVehicleMake;
+        public VehicleMakeService()
         {
-            this.lVehicleMake = lVehiceMake;
+        }
+
+        public void SetVehicleMakeList(ObservableCollection<VehicleMake> lVehicleMake)
+        {
+            this.lVehicleMake = lVehicleMake;
         }
 
 
-
-        public void CreateVehicleMake(string Name, string Abrv)
+        public void CreateVehicleMake(int id, string Name, string Abrv)
         {
-            int id = lVehicleMake.Count + 1;
             VehicleMake vehicleMake = new VehicleMake(id, Name, Abrv);
             lVehicleMake.Add(vehicleMake);
-        
+
         }
 
         public ObservableCollection<VehicleMake> ReadVehicleMake()
@@ -33,19 +29,37 @@ namespace VehicleCatalog.Service
             return lVehicleMake;
         }
 
-        public VehicleMake UpdateVehicleMake(string name, string abrv, VehicleMake vehicleMake)
+        public void UpdateVehicleMake(int id, string name, string abrv, VehicleMake vehicleMake)
         {
             vehicleMake.name = name;
             vehicleMake.abrv = abrv;
 
-            return vehicleMake;
+            int itemIndex;
+            foreach (VehicleMake vm in lVehicleMake.ToList())
+            {
+                if (vm.id == id)
+                {   
+                    /*
+                     * Nije radilo pa sam morao raditi na pokušaj iznad
+                     
+                    vm.name = name;
+                    vm.abrv = abrv;
+
+                     */
+                    itemIndex =lVehicleMake.IndexOf(vm);
+                    lVehicleMake.Remove(vm);
+                    lVehicleMake.Insert(itemIndex, new VehicleMake(id, name, abrv))
+                }
+            }
+            lVehicleMake = new ObservableCollection<VehicleMake>(lVehicleMake);
+
         }
 
         public void DeleteVehicleMake(VehicleMake vehicleMake)
         {
-            foreach(VehicleMake vm in lVehicleMake)
+            foreach (VehicleMake vm in lVehicleMake)
             {
-                if(vehicleMake.id == vm.id)
+                if (vehicleMake.id == vm.id)
                 {
                     lVehicleMake.Remove(vm);
                 }
