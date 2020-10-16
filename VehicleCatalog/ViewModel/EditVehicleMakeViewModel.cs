@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using VehicleCatalog.Interface;
 using VehicleCatalog.Model;
 using VehicleCatalog.Service;
 
