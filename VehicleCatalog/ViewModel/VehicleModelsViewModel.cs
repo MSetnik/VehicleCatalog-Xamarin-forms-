@@ -6,13 +6,15 @@ using VehicleCatalog.Model;
 
 namespace VehicleCatalog.ViewModel
 {
-    class VehicleModelsViewModel
+    public class VehicleModelsViewModel
     {
         public List<VehicleModel> lVehicleModels = new List<VehicleModel>();
-        public void GetMakerModels(List<VehicleModel> lVehicleModels)
+
+        public VehicleModelsViewModel(List<VehicleModel> vehicleModels)
         {
-           this.lVehicleModels = lVehicleModels;
+            this.lVehicleModels = vehicleModels;
         }
+
 
         public List<VehicleModel> VehicleModels { get =>lVehicleModels; }
 

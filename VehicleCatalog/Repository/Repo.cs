@@ -16,7 +16,7 @@ namespace VehicleCatalog.Repository
 
         }
 
-        public List<VehicleMake> InitVehicleModelData()
+        public List<VehicleMake> InitVehicleMakeData()
         {
 
             VehicleMake vm = new VehicleMake(1, "BMW", "BMW");
@@ -39,7 +39,7 @@ namespace VehicleCatalog.Repository
             return lVehicleMake;
         }
 
-        public List<VehicleModel> GetVehicleModels()
+        public List<VehicleModel> InitVehicleModelData()
         {
 
             lVehicleModel.Add(new VehicleModel(1, 1, "128", "BMW"));

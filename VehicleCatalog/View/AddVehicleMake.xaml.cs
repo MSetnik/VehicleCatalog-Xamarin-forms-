@@ -33,9 +33,16 @@ namespace VehicleCatalog.View
             var Name = vehicleName.Text;
             var Abrv = vehicleAbrv.Text;
 
-            addVehicleMakeVM.CreateVehicleMake(id, Name, Abrv);
-            App.Current.MainPage.Navigation.PopAsync();
-            CrossToastPopUp.Current.ShowToastMessage("Saved");
+            if(!String.IsNullOrEmpty(vehicleName.Text) && !String.IsNullOrEmpty(vehicleAbrv.Text))
+            {
+                addVehicleMakeVM.CreateVehicleMake(id, Name, Abrv);
+                App.Current.MainPage.Navigation.PopAsync();
+                CrossToastPopUp.Current.ShowToastMessage("Saved");
+            }
+            else
+            {
+                CrossToastPopUp.Current.ShowToastMessage("Fields cannot be empty.");
+            }
         }
     }
 }

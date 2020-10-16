@@ -10,6 +10,7 @@ using VehicleCatalog.Model;
 using VehicleCatalog.View;
 using VehicleCatalog.ViewModel;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace VehicleCatalog
 {
@@ -62,6 +63,15 @@ namespace VehicleCatalog
             var editItem = item.BindingContext as VehicleMake;
 
             Navigation.PushAsync(new EditVehicleMake(editItem, lVehicleMakes));
+        }
+
+        private void ItemTapped(object sender, EventArgs e)
+        {
+
+            var itemClicked = sender as SwipeView;
+
+            CrossToastPopUp.Current.ShowToastMessage(e.ToString());
+
         }
     }
 }

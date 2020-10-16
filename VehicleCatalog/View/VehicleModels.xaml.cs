@@ -16,8 +16,7 @@ namespace VehicleCatalog.View
         public VehicleModels(List<VehicleModel> lVehicleModels)
         {
             InitializeComponent();
-            VehicleModelsViewModel vehicleModels_ViewModel = new VehicleModelsViewModel();
-            vehicleModels_ViewModel.GetMakerModels(lVehicleModels);
+            VehicleModelsViewModel vehicleModels_ViewModel = new VehicleModelsViewModel(lVehicleModels);
             BindingContext = vehicleModels_ViewModel;
         }
     }
