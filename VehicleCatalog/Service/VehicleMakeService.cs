@@ -48,7 +48,7 @@ namespace VehicleCatalog.Service
                      */
                     itemIndex =lVehicleMake.IndexOf(vm);
                     lVehicleMake.Remove(vm);
-                    lVehicleMake.Insert(itemIndex, new VehicleMake(id, name, abrv))
+                    lVehicleMake.Insert(itemIndex, new VehicleMake(id, name, abrv));
                 }
             }
             lVehicleMake = new ObservableCollection<VehicleMake>(lVehicleMake);
