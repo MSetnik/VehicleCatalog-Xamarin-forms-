@@ -10,7 +10,6 @@ namespace VehicleCatalog.Model
         public int id { get; set; }
         public string name { get; set; }
         public string abrv { get; set; }
-        public List<VehicleModel> lModels { get; set; }
 
 
         public VehicleMake(int id, string name, string abrv)
