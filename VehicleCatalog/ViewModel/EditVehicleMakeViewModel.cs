@@ -4,7 +4,7 @@ using VehicleCatalog.Service;
 
 namespace VehicleCatalog.View
 {
-    internal class EditVehicleMakeViewModel
+    public class EditVehicleMakeViewModel
     {
         private VehicleMake vehicleMake;
         private VehicleMakeService vehicleMakeService;

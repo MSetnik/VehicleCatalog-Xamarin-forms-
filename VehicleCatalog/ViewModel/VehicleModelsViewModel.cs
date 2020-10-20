@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using VehicleCatalog.Model;
@@ -8,15 +9,15 @@ namespace VehicleCatalog.ViewModel
 {
     public class VehicleModelsViewModel
     {
-        public List<VehicleModel> lVehicleModels = new List<VehicleModel>();
+        public ObservableCollection<VehicleModel> lVehicleModels = new ObservableCollection<VehicleModel>();
 
-        public VehicleModelsViewModel(List<VehicleModel> vehicleModels)
+        public VehicleModelsViewModel(ObservableCollection<VehicleModel> vehicleModels)
         {
             this.lVehicleModels = vehicleModels;
         }
 
 
-        public List<VehicleModel> VehicleModels { get =>lVehicleModels; }
+        public ObservableCollection<VehicleModel> VehicleModels { get =>lVehicleModels; }
 
        
     }

@@ -2,6 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="VehicleCatalog.View.VehicleModels">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="MenuItem1" Order="Primary" Text="Add new" Priority="0" Clicked="AddNewVehicleModel"/>
+    </ContentPage.ToolbarItems>
     <StackLayout>
         <StackLayout BackgroundColor="#525050" Padding="5,0,5,0" Margin="0,4,0,0">
             <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
@@ -14,11 +17,19 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                            <Label x:Name="id" Text="{Binding id}" TextColor="Black" FontSize="12" VerticalOptions="Center" HorizontalOptions="Start" Margin="5"/>
-                            <Label x:Name="name" Text="{Binding name}" HorizontalOptions="Center" TextColor="Black" FontSize="12" VerticalOptions="Center" Margin="5"/>
-                            <Label x:Name="abrv" Text="{Binding abrv}" HorizontalOptions="End" TextColor="Black" FontSize="12" VerticalOptions="Center" Margin="5"/>
-                        </Grid>
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="Edit" BackgroundColor="#3d9ad9" Invoked="SwipeView_edit"/>
+                                    <SwipeItem Text="Delete" BackgroundColor="#db4040" Invoked="SwipeView_delete"/>
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                <Label x:Name="id" Text="{Binding id}" TextColor="Black" FontSize="12" VerticalOptions="Center" HorizontalOptions="Start" Padding="5,0,0,0"/>
+                                <Label x:Name="name" Text="{Binding name}" TextColor="Black" FontSize="12" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                <Label x:Name="abrv" Text="{Binding abrv}" TextColor="Black" FontSize="12" VerticalOptions="Center" HorizontalOptions="End" Padding="0,0,5,0" />
+                            </Grid>
+                        </SwipeView>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>

@@ -37,9 +37,9 @@ namespace VehicleCatalog.ViewModel
 
         
 
-        public List<VehicleModel> GetSelectedMakerId(int makerId)
+        public ObservableCollection<VehicleModel> GetSelectedMakerId(int makerId)
         {
-            List<VehicleModel> lVehicleMakerModels = new List<VehicleModel>();
+            ObservableCollection<VehicleModel> lVehicleMakerModels = new ObservableCollection<VehicleModel>();
 
             foreach (VehicleModel vm in lVehicleModel)
             {
@@ -49,7 +49,11 @@ namespace VehicleCatalog.ViewModel
                 }
             }
             return lVehicleMakerModels;
+        }
 
+        public int getVehicleModelSize()
+        {
+            return lVehicleModel.Count;
         }
     }
 }

@@ -19,6 +19,7 @@ namespace VehicleCatalog
         MainViewModel mainViewModel = new MainViewModel();
         ObservableCollection<VehicleMake> lVehicleMakes = new ObservableCollection<VehicleMake>();
         int id;
+        int vehicleModelId;
         public MainPage()
         {
 
@@ -26,13 +27,14 @@ namespace VehicleCatalog
             BindingContext = mainViewModel;
             lVehicleMakes = mainViewModel.VehicleMakes;
             id = lVehicleMakes.Count;
+            vehicleModelId = mainViewModel.getVehicleModelSize();
 
         }
         private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             var selectedItem = e.Item as VehicleMake;
 
-            Navigation.PushAsync(new VehicleModels(mainViewModel.GetSelectedMakerId(selectedItem.id)));
+            Navigation.PushAsync(new VehicleModels(mainViewModel.GetSelectedMakerId(selectedItem.id), selectedItem,vehicleModelId));
         }
 
         private void AddNewVehicleMaker(object sender, EventArgs e)
